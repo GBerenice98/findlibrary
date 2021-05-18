@@ -23,6 +23,9 @@ public class Arrete {
             joinColumns = @JoinColumn(name = "idSommet"),
             inverseJoinColumns = @JoinColumn(name = "idArrete"))
     private Set<Sommet> mesSommets = new HashSet<>();
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idGraphe")
+    private Graphe graphe;
 
 //    @Override
 //    public String toString() {

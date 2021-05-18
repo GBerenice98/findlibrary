@@ -1,10 +1,9 @@
-import { Categorie } from './categorie';
+import { Graphe } from './graphe';
 
 export class Sommet {
     idSommet?:number;
     poids?:number;
     name?:string;
-    categorie?:Categorie;
-    idCategorie?:number;
-
+    graphe?:Graphe;
+    idGraphe?:number;
 }

@@ -3,6 +3,7 @@ import { BiblioService } from '../services/biblio.service';
 import { Sommet } from '../models/sommet';
 import { InfoModalComponent } from '../info-modal/info-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Recherche } from '../models/recherche';
 
 @Component({
   selector: 'app-home',
@@ -25,20 +26,28 @@ export class HomeComponent implements OnInit {
   {
     let sourceExist=false;
     this.biblioService.libraryIsExist(this.source).subscribe(data => {
-      console.log("exist ? : ", data)
-      sourceExist=data;
+    console.log("exist ? : ", data)
+    sourceExist=data;
 
       if(data)
       {
+        let recherche : Recherche=new Recherche();
+        recherche.name=this.source;
+        recherche.nb=1;
+        this.biblioService.createRecherche(recherche).subscribe(data =>
+        {
+            console.log("Recherche : ", recherche);
+        })
+
         let cibles: Array<Sommet>=[];
         this.biblioService.findLibraryCandidates(this.source).subscribe(data =>
-          {      
-            if(data.length !=0) this.showResults=true;
-            data.forEach(s => {
-              cibles.push(s);
-            })
+        {      
+          if(data.length !=0) this.showResults=true;
+          data.forEach(s => {
+            cibles.push(s);
           })
-          this.libraryCibles=cibles;
+        })
+        this.libraryCibles=cibles;
       }   
       else this.openValidationModal("Désolé ! Nous n'avons pas trouvé cette bibliothèque dans notre base de données."); 
     })

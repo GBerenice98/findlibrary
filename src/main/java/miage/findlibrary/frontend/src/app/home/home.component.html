@@ -3,9 +3,9 @@
     <div class="row">
       <h1>Bienvenue ! </h1>
     </div> <br>
-    <mat-card>
+    <p>
         Saisissez dans la barre de recherche le nom de la bibliothèque source que vous souhaitez faire migrer, afin d'obtenir une liste de bibliothèques cibles potentielles.
-    </mat-card>
+    </p>
     <br><br>
 
     <div class="col-md-8">
@@ -25,9 +25,7 @@
     </div><br>
 
     <h4 *ngIf="showResults"> La/Les bibliothèque(s) cible(s) pour {{source}}  </h4>
-    <div class="row" *ngIf="showResults">
-        <mat-list role="list" >
-            <mat-list-item role="listitem" *ngFor="let cible of libraryCibles"><span>&#10003;</span> {{cible.name}} ( {{ cible.poids}} )</mat-list-item>
-        </mat-list>
+    <div class="row" *ngIf="showResults">       
+        <li *ngFor="let cible of libraryCibles">{{cible.name}} ( {{ cible.poids}} )</li>        
     </div><br>
 </div>

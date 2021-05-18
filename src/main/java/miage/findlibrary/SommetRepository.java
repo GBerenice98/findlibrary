@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface SommetRepository extends JpaRepository<Sommet, Long> {
 
     Optional<Sommet> findByName(String name);
-    List<Sommet> findByCategorie(Categorie categorie);
+    List<Sommet> findByGraphe(Graphe graphe);
 }

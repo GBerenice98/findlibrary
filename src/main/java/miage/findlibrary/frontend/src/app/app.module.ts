@@ -24,9 +24,8 @@ import { SidenavModule } from 'angular-ng-sidenav';
 import { ChartsModule } from 'ng2-charts';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { FlexLayoutModule } from '@angular/flex-layout'
-
-
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { AProposComponent } from './apropos/apropos.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +33,8 @@ import { FlexLayoutModule } from '@angular/flex-layout'
     ShowGraphComponent,
     HistoriqueRechercheComponent,
     HomeComponent,
-    InfoModalComponent
+    InfoModalComponent,
+    AProposComponent
   ],
   imports: [
     BrowserModule,

@@ -17,37 +17,39 @@ public class Biblio {
     @Autowired
     ArreteService arreteService;
     @Autowired
-    CategorieService categorieService;
+    GrapheService grapheService;
+    @Autowired
+    RechercheService rechercheService;
 
-    //Categorie
-    @PostMapping(value = "/createCategorie/{name}",consumes = "application/json",produces = "application/json")
-    public Categorie createCategorie(@PathVariable String name)
+    //Graphe
+    @PostMapping(value = "/createGraphe/{name}",consumes = "application/json",produces = "application/json")
+    public Graphe createGraphe(@RequestBody Graphe graphe)
     {
-        return this.categorieService.createCategorie(name);
+        return this.grapheService.createGraphe(graphe);
     }
 
-    @PutMapping(value = "/updateCategorie", consumes = "application/json",produces = "application/json")
-    public Categorie updateCategorie(@RequestBody Categorie categorie)
+    @PutMapping(value = "/updateGraphe", consumes = "application/json",produces = "application/json")
+    public Graphe updateGraphe(@RequestBody Graphe graphe)
     {
-        return  this.categorieService.updateCategorie(categorie);
+        return  this.grapheService.updateGraphe(graphe);
     }
 
-    @DeleteMapping(value = "/deleteCategorie/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void deleteCategorie(@PathVariable Long id)
+    @DeleteMapping(value = "/deleteGraphe/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteGraphe(@PathVariable Long id)
     {
-        this.categorieService.deleteCategorie(id);
+        this.grapheService.deleteGraphe(id);
     }
 
-    @GetMapping(value = "/getAllCategories", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Set<Categorie> getAllCategories()
+    @GetMapping(value = "/getAllGraphes", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Set<Graphe> getAllGraphes()
     {
-        return this.categorieService.getAllCategories();
+        return this.grapheService.getAllGraphes();
     }
 
-    @GetMapping(value = "/getAllSommetOfCategorie/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Set<Sommet> getAllSommetOfCategorie(@PathVariable Long id)
+    @GetMapping(value = "/getAllSommetOfGraphe/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Set<Sommet> getAllSommetOfGraphe(@PathVariable Long id)
     {
-        return this.categorieService.getAllSommetOfCategorie(id);
+        return this.grapheService.getAllSommetOfGraphe(id);
     }
 
     // Sommets
@@ -134,6 +136,31 @@ public class Biblio {
     public Set<Sommet> findLibraryCandidates(@PathVariable String name)
     {
         return this.sommetService.findLibraryCandidates(name);
+    }
+
+    //Recherche
+    @PostMapping(value = "/createRecherche",consumes = "application/json",produces = "application/json")
+    public Recherche createRecherche(@RequestBody Recherche recherche)
+    {
+        return this.rechercheService.createRecherche(recherche);
+    }
+
+    @GetMapping(value = "/getRechercheByName/{name}", consumes = "application/json",produces = "application/json")
+    public Recherche getRechercheByName(@PathVariable String name)
+    {
+        return  this.rechercheService.getRechercheByName(name);
+    }
+
+    @DeleteMapping(value = "/deleteRecherche/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteRechercheById(@PathVariable Long id)
+    {
+        this.rechercheService.deleteRechercheById(id);
+    }
+
+    @GetMapping(value = "/getAllRecherches", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Set<Recherche> getAllRecherches()
+    {
+        return this.rechercheService.getAllRecherches();
     }
 
 }

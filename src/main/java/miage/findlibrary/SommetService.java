@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class SommetService {
@@ -17,13 +16,13 @@ public class SommetService {
     @Autowired
     private ArreteRepository arreteRepository;
     @Autowired
-    private CategorieRepository categorieRepository;
+    private GrapheRepository grapheRepository;
 
     public Sommet createSommet(SommetImpl s)
     {
         System.out.println("Received sommet : "+s);
-        Categorie categorie=categorieRepository.findById(s.getIdCategorie()).orElseThrow();
-        Sommet sommet = new Sommet(categorie, s.getName(),s.getPoids());
+        Graphe graphe = grapheRepository.findById(s.getIdGraphe()).orElseThrow();
+        Sommet sommet = new Sommet(graphe, s.getName(),s.getPoids());
         sommet.setMesArretes(new HashSet<>());
         return this.sommetRepository.save(sommet);
     }
@@ -31,7 +30,7 @@ public class SommetService {
     public Sommet updateSommet(Sommet s)
     {
         Sommet sommet = this.sommetRepository.findById(s.getIdSommet()).orElseThrow();
-        sommet.setCategorie(s.getCategorie());
+        sommet.setGraphe(s.getGraphe());
         sommet.setName(s.getName());
         sommet.setPoids(s.getPoids());
         sommet.setMesArretes(new HashSet<>());

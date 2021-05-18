@@ -22,12 +22,12 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Graphes',
-      icon: 'schedule',
+      icon: 'image',
       url: '/graphes'
     },
     {
       title: 'Historique',
-      icon: 'schedule',
+      icon: 'timeline',
       url: '/historique'
     }
   ];

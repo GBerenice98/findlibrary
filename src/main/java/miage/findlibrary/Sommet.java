@@ -2,8 +2,6 @@ package miage.findlibrary;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -26,11 +24,11 @@ public class Sommet {
     @ManyToMany(mappedBy = "mesSommets",fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Set<Arrete> mesArretes;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idCategorie")
-    private Categorie categorie;
+    @JoinColumn(name = "idGraphe")
+    private Graphe graphe;
 
-    public Sommet(Categorie categorie,String name,Long poids) {
-        this.categorie=categorie;
+    public Sommet(Graphe graphe, String name, Long poids) {
+        this.graphe = graphe;
         this.poids = poids;
         this.name = name;
     }
@@ -39,7 +37,7 @@ public class Sommet {
     public String toString() {
         return "Sommet{" +
                 "idSommet=" + idSommet +
-                ", categorie=" + categorie.getIdCategorie() +
+                ", graphe=" + graphe.getIdGraphe() +
                 ", poids=" + poids +
                 ", name='" + name + '\'' +
                 '}';

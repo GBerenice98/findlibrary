@@ -12,21 +12,27 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 @ToString
-public class Categorie {
+public class Graphe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCategorie;
+    private Long idGraphe;
     @Column(unique=true)
     private String name;
+    private String url;
     @Builder.Default
-    @OneToMany( cascade = CascadeType.ALL, mappedBy="categorie")
+    @OneToMany( cascade = CascadeType.ALL, mappedBy="graphe")
     @JsonIgnore
     private Set<Sommet> listSommets = new HashSet<>();
+    @Builder.Default
+    @OneToMany( cascade = CascadeType.ALL, mappedBy="graphe")
+    @JsonIgnore
+    private Set<Arrete> listArretes = new HashSet<>();
 
-    public Categorie(){}
+    public Graphe(){}
 
-    public Categorie(String name) {
+    public Graphe(String name, String url) {
         this.name = name;
+        this.url = url;
     }
 }

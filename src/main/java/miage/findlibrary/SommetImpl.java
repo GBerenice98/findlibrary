@@ -15,15 +15,15 @@ import java.util.Set;
 public class SommetImpl {
 
     private Long idSommet;
-    private Long idCategorie;
+    private Long idGraphe;
     private Long poids;
     private String name;
     @Builder.Default
     private Set<Long> mesArretes = new HashSet<>();
 
-    public SommetImpl(String name,Long poids, Long idCategorie) {
+    public SommetImpl(String name,Long poids, Long idGraphe) {
         this.poids = poids;
         this.name = name;
-        this.idCategorie=idCategorie;
+        this.idGraphe = idGraphe;
     }
 }
