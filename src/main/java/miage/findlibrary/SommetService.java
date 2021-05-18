@@ -74,7 +74,7 @@ public class SommetService {
     public Set<Sommet> findLibraryCandidates(String name)
     {
         System.out.println("Name received : "+name);
-        Sommet source = this.sommetRepository.findByName(name);
+        Sommet source = this.sommetRepository.findByName(name).orElseThrow();
 
         System.out.println("Sommet source : "+source);
 
@@ -95,5 +95,9 @@ public class SommetService {
 
         System.out.println("Sommets cibles : "+cibles);
         return cibles;
+    }
+
+    public boolean libraryIsExist(String name) {
+         return this.sommetRepository.findByName(name).isPresent();
     }
 }
