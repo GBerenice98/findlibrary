@@ -1,7 +1,9 @@
-package miage.findlibrary;
+package miage.findlibrary.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import miage.findlibrary.entities.Arrete;
+import miage.findlibrary.entities.Graphe;
 
 import javax.persistence.*;
 import java.util.Set;

@@ -1,5 +1,10 @@
-package miage.findlibrary;
+package miage.findlibrary.services;
 
+import miage.findlibrary.entities.Sommet;
+import miage.findlibrary.repositories.SommetRepository;
+import miage.findlibrary.entities.Arrete;
+import miage.findlibrary.models.ArreteImpl;
+import miage.findlibrary.repositories.ArreteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

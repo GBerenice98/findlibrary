@@ -1,5 +1,7 @@
-package miage.findlibrary;
+package miage.findlibrary.services;
 
+import miage.findlibrary.entities.Recherche;
+import miage.findlibrary.repositories.RechercheRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

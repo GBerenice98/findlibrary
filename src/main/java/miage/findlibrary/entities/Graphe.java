@@ -1,4 +1,4 @@
-package miage.findlibrary;
+package miage.findlibrary.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;

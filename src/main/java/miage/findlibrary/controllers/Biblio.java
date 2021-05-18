@@ -1,5 +1,15 @@
-package miage.findlibrary;
+package miage.findlibrary.controllers;
 
+import miage.findlibrary.entities.Arrete;
+import miage.findlibrary.entities.Graphe;
+import miage.findlibrary.entities.Recherche;
+import miage.findlibrary.entities.Sommet;
+import miage.findlibrary.models.ArreteImpl;
+import miage.findlibrary.models.SommetImpl;
+import miage.findlibrary.services.ArreteService;
+import miage.findlibrary.services.GrapheService;
+import miage.findlibrary.services.RechercheService;
+import miage.findlibrary.services.SommetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package miage.findlibrary;
+package miage.findlibrary.models;
 
 import lombok.*;
 
