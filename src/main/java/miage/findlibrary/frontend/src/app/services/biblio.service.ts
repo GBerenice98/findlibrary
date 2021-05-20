@@ -10,7 +10,7 @@ import { Recherche } from '../models/recherche';
   providedIn: 'root'
 })
 export class BiblioService {
-  public url =environment.api_url;
+  public url =environment.api_url+"/api";
   constructor(private http : HttpClient) {}
 
 
