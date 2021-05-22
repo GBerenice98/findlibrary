@@ -65,6 +65,5 @@ export class AppComponent implements OnInit {
   close() {
     this.isExpanded = false;
   }
-
-
+  
 }

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class SommetService {
@@ -24,6 +25,8 @@ public class SommetService {
     private ArreteRepository arreteRepository;
     @Autowired
     private GrapheRepository grapheRepository;
+    @Autowired
+    private GrapheService grapheService;
 
     public Sommet createSommet(SommetImpl s)
     {
@@ -103,7 +106,11 @@ public class SommetService {
         return cibles;
     }
 
-    public boolean libraryIsExist(String name) {
-         return this.sommetRepository.findByName(name).isPresent();
+    public boolean libraryIsExist(String name, Long id) {
+        Set<Sommet> sommets = this.grapheService.getAllSommetOfGraphe(id)
+                            .stream()
+                            .filter(sommet -> sommet.getName().equals(name)).collect(Collectors.toSet());
+
+        return !sommets.isEmpty();
     }
 }

@@ -8,24 +8,37 @@
     </p>
     <br><br>
 
-    <div class="col-md-8">
-        <div><br></div>
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Saisissez le nom de la bibliotheque source" [(ngModel)]="source"/>
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" (click)="searchLibrary()">
-                Rechercher
-                </button>
+    <div class="row">
+        <div class="col-md-8">
+            <!-- <div><br></div>
+            <div class="input-group mb-3"> -->
+                <mat-form-field >
+                    <mat-label>Sélectionnez la catégorie de la bibliotheque</mat-label>
+                    <mat-select [(ngModel)]="selectedCategorie" required>
+                      <mat-option *ngFor="let g of lesGraphes" value="{{g.idGraphe}}">{{g.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            <!-- </div>         -->
+            <br>
+        </div>
+    
+        <div class="col-md-8">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Saisissez le nom de la bibliotheque source" [(ngModel)]="source"/>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="searchLibrary()">
+                    Rechercher
+                    </button>
+                </div>
             </div>
-        </div>
-        <div class="input-group-append">
-       
-        </div>
-        <br>
-    </div><br>
+        </div><br>
+
+    </div>
+
+    
 
     <h4 *ngIf="showResults"> La/Les bibliothèque(s) cible(s) pour {{source}}  </h4>
     <div class="row" *ngIf="showResults">       
-        <li *ngFor="let cible of libraryCibles">{{cible.name}} ( {{ cible.poids}} )</li>        
+        <li *ngFor="let cible of libraryCibles">{{cible.name}} ({{cible.poids}})</li>        
     </div><br>
 </div>

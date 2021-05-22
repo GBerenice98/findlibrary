@@ -11,8 +11,8 @@ import { Recherche } from '../models/recherche';
 })
 export class BiblioService {
   public url =environment.api_url+"/api";
-  constructor(private http : HttpClient) {}
 
+  constructor(private http : HttpClient) {}
 
   public getAllGraphes() : Observable<Array<Graphe>>{
     const routeQuery=this.url+"/getAllGraphes/"+name;
@@ -24,9 +24,9 @@ export class BiblioService {
     return this.http.get<Array<Sommet>>(routeQuery);
   }
 
-  public libraryIsExist(name : string): Observable<boolean>
+  public libraryIsExist(id:number, name : string): Observable<boolean>
   {
-    const routeQuery=this.url+"/isExist/"+name;
+    const routeQuery=this.url+"/isExist/"+id+"/"+name;
     return this.http.get<boolean>(routeQuery);
   }
 
@@ -44,6 +44,5 @@ export class BiblioService {
     const routeQuery=this.url+"/getAllRecherches";
     return this.http.get<Array<Recherche>>(routeQuery);
   }
-
 
 }

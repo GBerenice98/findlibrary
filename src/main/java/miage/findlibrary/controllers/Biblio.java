@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Set;
 
-@CrossOrigin("https://angular-find-your-biblio.herokuapp.com/")
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/api")
 public class Biblio {
@@ -93,10 +93,10 @@ public class Biblio {
         return this.sommetService.getSommetById(aId);
     }
 
-    @GetMapping(value = "/isExist/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public boolean getSommetById(@PathVariable String name)
+    @GetMapping(value = "/isExist/{id}/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public boolean getSommetById(@PathVariable String name, @PathVariable Long id)
     {
-        return this.sommetService.libraryIsExist(name);
+        return this.sommetService.libraryIsExist(name,id);
     }
 
     @GetMapping(value = "/getAllSommets", produces = MediaType.APPLICATION_JSON_VALUE)

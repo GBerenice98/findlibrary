@@ -25,6 +25,7 @@ public class Sommet {
     @JsonIgnore
     @ManyToMany(mappedBy = "mesSommets",fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Set<Arrete> mesArretes;
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idGraphe")
     private Graphe graphe;
@@ -39,7 +40,6 @@ public class Sommet {
     public String toString() {
         return "Sommet{" +
                 "idSommet=" + idSommet +
-                ", graphe=" + graphe.getIdGraphe() +
                 ", poids=" + poids +
                 ", name='" + name + '\'' +
                 '}';
