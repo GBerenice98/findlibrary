@@ -36,31 +36,32 @@ export class HomeComponent implements OnInit {
 
   searchLibrary()
   {
-    if(this.selectedCategorie==0) 
+    if(this.selectedCategorie==0)
       this.openValidationModal("Merci de sélectionnez une catégorie. Pensez à regarder dans les graphes de migrations disponibles en cas de doute.");
     else{
-      this.biblioService.libraryIsExist(this.selectedCategorie,this.source).subscribe(data => {
-        console.log("exist ? : ", data)
+      this.biblioService.libraryIsExist(this.selectedCategorie,this.source).subscribe(isExist => {
+        console.log("exist ? : ", isExist)
         console.log("nom categorie : ",this.selectedCategorie)
-  
-        if(data) {
-          let recherche : Recherche=new Recherche();
-          recherche.name=this.source;
-          recherche.nb=1;
-          this.biblioService.createRecherche(recherche).subscribe(data => { console.log("Recherche : ", recherche); })
-  
+
+        let recherche : Recherche=new Recherche();
+        recherche.name=this.source;
+        recherche.nb=1;
+        this.biblioService.createRecherche(recherche).subscribe(r => { console.log("Recherche : ", r); })
+
+        if(isExist) {
           let cibles: Array<Sommet>=[];
           this.biblioService.findLibraryCandidates(this.source).subscribe(data =>
-          {      
+          {
             if(data.length !=0) this.showResults=true;
+            else this.openValidationModal("Désolé ! Nous n'avons pas trouvé de bibliothèques cibles pour cette bibliothèque.");
             data.forEach(s => {
               cibles.push(s);
             })
           })
           this.libraryCibles=cibles;
-        }else this.openValidationModal("Nous n'avons pas trouvé cette bibliothèque. Merci de vérifiez votre syntaxe."); 
+        }else this.openValidationModal("Nous n'avons pas trouvé cette bibliothèque. Merci de vérifiez votre syntaxe et la catégorie sélectionnée");
       })
-    }    
+    }
   }
 
   public openValidationModal(message:string) : void {

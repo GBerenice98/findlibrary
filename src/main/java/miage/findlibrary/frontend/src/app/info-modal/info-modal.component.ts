@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class InfoModalComponent implements OnInit {
 
   @Input() message: string='';
-  constructor(public activeModal: NgbActiveModal) { 
+  constructor(public activeModal: NgbActiveModal) {
   }
 
   ngOnInit(): void {

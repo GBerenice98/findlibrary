@@ -1,5 +1,6 @@
 package miage.findlibrary.services;
 
+import lombok.extern.slf4j.Slf4j;
 import miage.findlibrary.models.SommetImpl;
 import miage.findlibrary.repositories.SommetRepository;
 import miage.findlibrary.entities.Arrete;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class SommetService {
 
@@ -30,7 +32,7 @@ public class SommetService {
 
     public Sommet createSommet(SommetImpl s)
     {
-        System.out.println("Received sommet : "+s);
+        log.info("Received sommet {} ",s);
         Graphe graphe = grapheRepository.findById(s.getIdGraphe()).orElseThrow();
         Sommet sommet = new Sommet(graphe, s.getName(),s.getPoids());
         sommet.setMesArretes(new HashSet<>());
@@ -45,9 +47,7 @@ public class SommetService {
         sommet.setPoids(s.getPoids());
         sommet.setMesArretes(new HashSet<>());
 
-        s.getMesArretes().forEach( aId -> {
-            sommet.getMesArretes().add(this.arreteRepository.findById(aId.getIdArrete()).orElseThrow());
-        });
+        s.getMesArretes().forEach( aId -> sommet.getMesArretes().add(this.arreteRepository.findById(aId.getIdArrete()).orElseThrow()));
 
         sommet.getMesArretes().forEach(arrete -> {
             arrete.getMesSommets().add(sommet);
@@ -58,13 +58,8 @@ public class SommetService {
     }
 
     public Set<Sommet> createManySommet(List<SommetImpl> sommets) {
-
         Set<Sommet> listSommets = new HashSet<>();
-
-        sommets.forEach(sImpl -> {
-            listSommets.add(this.createSommet(sImpl));
-        });
-
+        sommets.forEach(sImpl -> listSommets.add(this.createSommet(sImpl)));
         return listSommets;
     }
 
@@ -82,10 +77,10 @@ public class SommetService {
 
     public Set<Sommet> findLibraryCandidates(String name)
     {
-        System.out.println("Name received : "+name);
+        log.info("Name received : "+name);
         Sommet source = this.sommetRepository.findByName(name).orElseThrow();
 
-        System.out.println("Sommet source : "+source);
+        log.info("Sommet source : "+source);
 
         List<Arrete> arretes = new ArrayList<>();
         Set<Sommet> cibles = new HashSet<>();
@@ -94,15 +89,13 @@ public class SommetService {
             if(arrete.getMesSommets().contains(source)) arretes.add(arrete);
         });
 
-        System.out.println("Arretes contenant source : "+arretes.toString());
+        log.info("Arretes contenant source : "+arretes.toString());
 
-        arretes.forEach(a -> {
-            a.getMesSommets().forEach(s -> {
-                if(!source.getName().equals(s.getName()) && s.getPoids()>0) cibles.add(s);
-            });
-        });
+        arretes.forEach(a -> a.getMesSommets().forEach(s -> {
+            if(!source.getName().equals(s.getName()) && s.getPoids()>0) cibles.add(s);
+        }));
 
-        System.out.println("Sommets cibles : "+cibles);
+        log.info("Sommets cibles : "+cibles);
         return cibles;
     }
 
@@ -111,6 +104,7 @@ public class SommetService {
                             .stream()
                             .filter(sommet -> sommet.getName().equals(name)).collect(Collectors.toSet());
 
+        log.info("sommets");
         return !sommets.isEmpty();
     }
 }

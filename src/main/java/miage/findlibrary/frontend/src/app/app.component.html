@@ -7,7 +7,6 @@
   </ul>
 </nav>
 
-<app-header ></app-header>
 <ng-sidenav-container>
   <ng-sidenav
     [expanded]="isExpanded"
@@ -19,7 +18,7 @@
       <div class="item" *ngFor="let item of menuItems" routerLink="{{item.url}}">
         <div class="item-body">
           <div class="icon">
-            <i class="material-icons">{{item.icon}}</i>
+            <em class="material-icons">{{item.icon}}</em>
           </div>
           <div class="text" *hiddenOnCollapsed="isExpanded">{{item.title}}</div>
         </div>

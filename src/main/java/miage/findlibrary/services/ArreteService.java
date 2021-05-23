@@ -39,29 +39,22 @@ public class ArreteService {
     }
 
     public Arrete updateArret(ArreteImpl arreteImpl) {
-
         Arrete arrete = this.arreteRepository.findById(arreteImpl.getIdArrete()).orElseThrow();
         arrete.setPoids(arreteImpl.getPoids());
         arrete.setMesSommets(new HashSet<>());
 
-        arreteImpl.getMesSommets().forEach( aId -> {
-            arrete.getMesSommets().add(this.sommetRepository.findById(aId).orElseThrow());
-        });
+        arreteImpl.getMesSommets().forEach( aId -> arrete.getMesSommets().add(this.sommetRepository.findById(aId).orElseThrow()));
 
         arrete.getMesSommets().forEach(ar -> {
             ar.getMesArretes().add(arrete);
             this.arreteRepository.saveAndFlush(arrete);
         });
-
         return this.arreteRepository.saveAndFlush(arrete);
     }
 
     public Set<Arrete> createManyArretes(List<ArreteImpl> arretes) {
         Set<Arrete> listArretes = new HashSet<>();
-        arretes.forEach(arrete -> {
-            listArretes.add(this.createArrete(arrete));
-        });
-
+        arretes.forEach(arrete -> listArretes.add(this.createArrete(arrete)));
         return listArretes;
     }
 
