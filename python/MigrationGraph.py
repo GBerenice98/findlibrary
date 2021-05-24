@@ -27,12 +27,12 @@ with open(path+'python\\edges.csv') as csvfile:
 
         #Dessin du graphe
         edges_labels = nx.get_edge_attributes(G, 'label')
+        nx.draw_networkx_edges(G, pos)
         nx.draw_networkx_edge_labels(G, pos, edges_labels)
         nx.draw_networkx_labels(G, pos)
         nx.draw_networkx_nodes(G, pos, nodelist=positive_nodes, node_color='green', node_shape='o')
         nx.draw_networkx_nodes(G, pos, nodelist=negative_nodes, node_color='red', node_shape='s')
         nx.draw_networkx_nodes(G, pos, nodelist=other_nodes, node_color='blue', node_shape='v')
-        nx.draw(G, pos)
 
         #Sauvegarde du graphe au format PNG
         plt.savefig(path+"src\\main\\java\\miage\\findlibrary\\frontend\\src\\assets\\images\\"+nomGraphe, format="PNG")

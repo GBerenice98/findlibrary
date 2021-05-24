@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
             })
           })
           this.libraryCibles=cibles;
-        }else this.openValidationModal("Nous n'avons pas trouvé cette bibliothèque. Merci de vérifiez votre syntaxe et la catégorie sélectionnée");
+        }else this.openValidationModal("Nous n'avons pas trouvé cette bibliothèque dans notre base de données. Merci de vérifier votre syntaxe et la catégorie sélectionnée dans l'onglet 'Graphe' .");
       })
     }
   }
