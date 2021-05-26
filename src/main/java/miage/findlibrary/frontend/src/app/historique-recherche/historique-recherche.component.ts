@@ -26,14 +26,12 @@ export class HistoriqueRechercheComponent implements OnInit {
   {
     let labels: string [] = [];
     let values: number [] = [];
-    this.biblioService.getAllRecherches().subscribe(data => {
-      console.log(" recherches : ", data);
-      data.forEach( r => {
+    this.biblioService.getAllRecherches().subscribe((data: any[]) => {
+      data.forEach( (r: { name: string; nb: number; }) => {
         labels.push(r.name);
         values.push(r.nb);
       })
-      console.log("labels : ", labels);
-      console.log(" values : ", values);
+      
       this.barChartLabels=labels;
       this.barChartData = [
         { data:values, label: 'Bibliothèques sources recherchées' }

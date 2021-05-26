@@ -21,23 +21,20 @@
 
         <div class="col-md-8">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Saisissez le nom de la bibliothèque source" [(ngModel)]="source"/>
+                <input direction="text" class="form-control" placeholder="Saisissez le nom de la bibliothèque source" [(ngModel)]="source"/>
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" (click)="searchLibrary()">
+                    <button class="btn btn-outline-secondary" direction="button" (click)="searchLibrary()">
                     Rechercher
                     </button>
                 </div>
             </div>
         </div><br>
-
     </div>
-
-
 
     <h4 *ngIf="showResults"> La/Les bibliothèque(s) cible(s) pour {{source}}  </h4>
     <div *ngIf="showResults" class="row">
       <ul>
-        <li *ngFor="let cible of libraryCibles">{{cible.name}} ({{cible.poids}})</li>
+        <li id="cibles" *ngFor="let cible of libraryCibles">{{cible.name}} ({{cible.poids}})</li>
       </ul>
     </div><br>
 </div>

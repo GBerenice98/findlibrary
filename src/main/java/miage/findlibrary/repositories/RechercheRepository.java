@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface RechercheRepository extends JpaRepository<Recherche,Long> {
-    Optional<Recherche> findByName(String name);
+    Optional<Recherche> findByNameIgnoreCase(String name);
 }

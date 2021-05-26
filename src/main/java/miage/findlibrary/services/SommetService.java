@@ -1,17 +1,16 @@
 package miage.findlibrary.services;
 
 import lombok.extern.slf4j.Slf4j;
-import miage.findlibrary.models.SommetImpl;
-import miage.findlibrary.repositories.SommetRepository;
 import miage.findlibrary.entities.Arrete;
 import miage.findlibrary.entities.Graphe;
 import miage.findlibrary.entities.Sommet;
+import miage.findlibrary.models.SommetImpl;
 import miage.findlibrary.repositories.ArreteRepository;
 import miage.findlibrary.repositories.GrapheRepository;
+import miage.findlibrary.repositories.SommetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -34,20 +33,20 @@ public class SommetService {
     {
         log.info("Received sommet {} ",s);
         Graphe graphe = grapheRepository.findById(s.getIdGraphe()).orElseThrow();
-        Sommet sommet = new Sommet(graphe, s.getName(),s.getPoids());
+        Sommet sommet = new Sommet(graphe,s.getName(),s.getPoids());
         sommet.setMesArretes(new HashSet<>());
         return this.sommetRepository.save(sommet);
     }
 
-    public Sommet updateSommet(Sommet s)
+    public Sommet updateSommet(SommetImpl s)
     {
         Sommet sommet = this.sommetRepository.findById(s.getIdSommet()).orElseThrow();
-        sommet.setGraphe(s.getGraphe());
+        sommet.setGraphe(grapheRepository.findById(s.getIdGraphe()).orElseThrow());
         sommet.setName(s.getName());
         sommet.setPoids(s.getPoids());
         sommet.setMesArretes(new HashSet<>());
 
-        s.getMesArretes().forEach( aId -> sommet.getMesArretes().add(this.arreteRepository.findById(aId.getIdArrete()).orElseThrow()));
+        s.getMesArretes().forEach( aId -> sommet.getMesArretes().add(this.arreteRepository.findById(aId).orElseThrow()));
 
         sommet.getMesArretes().forEach(arrete -> {
             arrete.getMesSommets().add(sommet);
@@ -78,21 +77,17 @@ public class SommetService {
     public Set<Sommet> findLibraryCandidates(String name)
     {
         log.info("Name received : "+name);
-        Sommet source = this.sommetRepository.findByName(name).orElseThrow();
+        Sommet source = this.sommetRepository.findByNameIgnoreCase(name).orElseThrow();
 
         log.info("Sommet source : "+source);
 
-        List<Arrete> arretes = new ArrayList<>();
+        List<Arrete> arretes = this.arreteRepository.findBySourceNameIgnoreCase(name);
         Set<Sommet> cibles = new HashSet<>();
-
-        this.arreteRepository.findAll().forEach( arrete -> {
-            if(arrete.getMesSommets().contains(source)) arretes.add(arrete);
-        });
 
         log.info("Arretes contenant source : "+arretes.toString());
 
         arretes.forEach(a -> a.getMesSommets().forEach(s -> {
-            if(!source.getName().equals(s.getName()) && s.getPoids()>0) cibles.add(s);
+            if(!source.getName().equalsIgnoreCase(s.getName()) && s.getPoids()>0) cibles.add(s);
         }));
 
         log.info("Sommets cibles : "+cibles);
@@ -102,9 +97,9 @@ public class SommetService {
     public boolean libraryIsExist(String name, Long id) {
         Set<Sommet> sommets = this.grapheService.getAllSommetOfGraphe(id)
                             .stream()
-                            .filter(sommet -> sommet.getName().equals(name)).collect(Collectors.toSet());
+                            .filter(sommet -> sommet.getName().equalsIgnoreCase(name)).collect(Collectors.toSet());
 
-        log.info("sommets");
+        log.info("sommets {}",sommets);
         return !sommets.isEmpty();
     }
 }

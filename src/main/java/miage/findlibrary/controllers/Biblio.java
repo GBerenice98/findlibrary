@@ -5,6 +5,8 @@ import miage.findlibrary.entities.Graphe;
 import miage.findlibrary.entities.Recherche;
 import miage.findlibrary.entities.Sommet;
 import miage.findlibrary.models.ArreteImpl;
+import miage.findlibrary.models.GrapheDto;
+import miage.findlibrary.models.RechercheDto;
 import miage.findlibrary.models.SommetImpl;
 import miage.findlibrary.services.ArreteService;
 import miage.findlibrary.services.GrapheService;
@@ -33,15 +35,15 @@ public class Biblio {
 
     //Graphe
     @PostMapping(value = "/createGraphe/{name}",consumes = "application/json",produces = "application/json")
-    public Graphe createGraphe(@RequestBody Graphe graphe)
+    public Graphe createGraphe(@RequestBody GrapheDto g)
     {
-        return this.grapheService.createGraphe(graphe);
+        return this.grapheService.createGraphe(g);
     }
 
     @PutMapping(value = "/updateGraphe", consumes = "application/json",produces = "application/json")
-    public Graphe updateGraphe(@RequestBody Graphe graphe)
+    public Graphe updateGraphe(@RequestBody GrapheDto g)
     {
-        return  this.grapheService.updateGraphe(graphe);
+        return  this.grapheService.updateGraphe(g);
     }
 
     @DeleteMapping(value = "/deleteGraphe/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -76,9 +78,9 @@ public class Biblio {
     }
 
     @PutMapping(value = "/updateSommet", consumes = "application/json",produces = "application/json")
-    public Sommet updateSommet(@RequestBody Sommet sommet)
+    public Sommet updateSommet(@RequestBody SommetImpl s)
     {
-        return  this.sommetService.updateSommet(sommet);
+        return  this.sommetService.updateSommet(s);
     }
 
     @DeleteMapping(value = "/deleteSommet/{sId}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -150,9 +152,9 @@ public class Biblio {
 
     //Recherche
     @PostMapping(value = "/createRecherche",consumes = "application/json",produces = "application/json")
-    public Recherche createRecherche(@RequestBody Recherche recherche)
+    public Recherche createRecherche(@RequestBody RechercheDto rechercheDto)
     {
-        return this.rechercheService.createRecherche(recherche);
+        return this.rechercheService.createRecherche(rechercheDto);
     }
 
     @GetMapping(value = "/getRechercheByName/{name}", consumes = "application/json",produces = "application/json")

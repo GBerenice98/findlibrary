@@ -29,117 +29,138 @@ public class DbInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) {
         log.info("DB initializes...");
-        List<Graphe> categories = grapheRepository.findAll();
+        List<Graphe> graphes = grapheRepository.findAll();
         List<Sommet> sommets = sommetRepository.findAll();
         List<Arrete> arretes = arreteRepository.findAll();
 
-        if(categories.isEmpty())
+        if(graphes.isEmpty())
         {
             grapheRepository.save(new Graphe("Logging","./../assets/images/gMLogging.PNG"));
             grapheRepository.save(new Graphe("JSON","./../assets/images/gMJson.PNG"));
             log.info("--- Some graphes initialized");
         }
 
+        // Sommets du graphe Logging
+        String s1 = "sl4j";
+        String s2="logback";
+        String s3="commons-logging";
+        String s4="log4j";
+
+        //Sommets du graphe JSON
+        String s5 = "jsonic";
+        String s6 ="json-lib";
+        String s7 ="fastjson";
+        String s8 ="json-smart";
+        String s9 ="jackson";
+        String s10 ="gson";
+        String s11="json-path";
+        String s12="json-simple";
+        String s13="org.json";
+        String s14="svenson";
+        String s15="xstream";
+        String s16="jettison";
+        String s17="flexjson";
+
         if(sommets.isEmpty())
         {
             // Sommets du graphe Logging
-            sommetRepository.save(new Sommet(this.grapheRepository.findById(1L).orElseThrow(),"sl4j",130L));
-            sommetRepository.save(new Sommet(this.grapheRepository.findById(1L).orElseThrow(),"logback",19L));
-            sommetRepository.save(new Sommet(this.grapheRepository.findById(1L).orElseThrow(),"commons-logging",-66L));
-            sommetRepository.save(new Sommet(this.grapheRepository.findById(1L).orElseThrow(),"log4j",-83L));
+            sommetRepository.save(new Sommet(this.grapheRepository.findById(1L).orElseThrow(), s1, 130L));
+            sommetRepository.save(new Sommet(this.grapheRepository.findById(1L).orElseThrow(),s2,19L));
+            sommetRepository.save(new Sommet(this.grapheRepository.findById(1L).orElseThrow(),s3,-66L));
+            sommetRepository.save(new Sommet(this.grapheRepository.findById(1L).orElseThrow(),s4,-83L));
 
             //Sommets du graphe JSON
-            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),"jsonic",1L));
-            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),"json-lib",-18L));
-            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),"fastjson",8L));
-            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),"json-smart",0L));
-            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),"jackson",53L));
-            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),"gson",18L));
-            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),"json-path",0L));
-            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),"json-simple",-9L));
-            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),"org.json",-50L));
-            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),"svenson",-1L));
-            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),"xstream",-5L));
-            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),"jettison",-2L));
-            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),"flexjson",5L));
+            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),s5,1L));
+            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),s6,-18L));
+            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),s7,8L));
+            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),s8,0L));
+            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),s9,53L));
+            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),s10,18L));
+            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),s11,0L));
+            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),s12,-9L));
+            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),s13,-50L));
+            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),s14,-1L));
+            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),s15,-5L));
+            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),s16,-2L));
+            sommetRepository.save(new Sommet(this.grapheRepository.findById(2L).orElseThrow(),s17,5L));
 
             log.info("--- Some sommets initialized");
         }
 
         if(arretes.isEmpty()) {
             // Arretes du graphe Logging
-            arreteRepository.save(new Arrete(6L,
+            arreteRepository.save(new Arrete(6L,s1,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(1L).orElseThrow(), sommetRepository.findById(3L).orElseThrow())),
                     this.grapheRepository.findById(1L).orElseThrow()));
-            arreteRepository.save(new Arrete(19L,
+            arreteRepository.save(new Arrete(19L,s1,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(1L).orElseThrow(), sommetRepository.findById(4L).orElseThrow())),
                     this.grapheRepository.findById(1L).orElseThrow()));
-            arreteRepository.save(new Arrete(1L,
+            arreteRepository.save(new Arrete(1L,s2,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(2L).orElseThrow(), sommetRepository.findById(1L).orElseThrow())),
                     this.grapheRepository.findById(1L).orElseThrow()));
-            arreteRepository.save(new Arrete(1L,
+            arreteRepository.save(new Arrete(1L,s2,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(2L).orElseThrow(), sommetRepository.findById(4L).orElseThrow())),
                     this.grapheRepository.findById(1L).orElseThrow()));
-            arreteRepository.save(new Arrete(61L,
+            arreteRepository.save(new Arrete(61L,s3,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(3L).orElseThrow(), sommetRepository.findById(1L).orElseThrow())),
                     this.grapheRepository.findById(1L).orElseThrow()));
-            arreteRepository.save(new Arrete(9L,
+            arreteRepository.save(new Arrete(9L,s3,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(3L).orElseThrow(), sommetRepository.findById(2L).orElseThrow())),
                     this.grapheRepository.findById(1L).orElseThrow()));
-            arreteRepository.save(new Arrete(17L,
+            arreteRepository.save(new Arrete(17L,s3,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(3L).orElseThrow(), sommetRepository.findById(4L).orElseThrow())),
                     this.grapheRepository.findById(1L).orElseThrow()));
-            arreteRepository.save(new Arrete(95L,
+            arreteRepository.save(new Arrete(95L,s4,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(4L).orElseThrow(), sommetRepository.findById(1L).orElseThrow())),
                     this.grapheRepository.findById(1L).orElseThrow()));
-            arreteRepository.save(new Arrete(13L,
+            arreteRepository.save(new Arrete(13L,s4,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(4L).orElseThrow(), sommetRepository.findById(2L).orElseThrow())),
                     this.grapheRepository.findById(1L).orElseThrow()));
-            arreteRepository.save(new Arrete(12L,
+            arreteRepository.save(new Arrete(12L,s4,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(4L).orElseThrow(), sommetRepository.findById(3L).orElseThrow())),
                     this.grapheRepository.findById(1L).orElseThrow()));
 
             //Arretes du graphe JSON
-            arreteRepository.save(new Arrete(11L,
+            arreteRepository.save(new Arrete(11L,s6,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(6L).orElseThrow(), sommetRepository.findById(9L).orElseThrow())),
                     this.grapheRepository.findById(2L).orElseThrow()));
-            arreteRepository.save(new Arrete(5L,
+            arreteRepository.save(new Arrete(5L,s6,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(6L).orElseThrow(), sommetRepository.findById(10L).orElseThrow())),
                     this.grapheRepository.findById(2L).orElseThrow()));
-            arreteRepository.save(new Arrete(2L,
+            arreteRepository.save(new Arrete(2L,s9,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(9L).orElseThrow(), sommetRepository.findById(6L).orElseThrow())),
                     this.grapheRepository.findById(2L).orElseThrow()));
-            arreteRepository.save(new Arrete(5L,
+            arreteRepository.save(new Arrete(5L,s9,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(9L).orElseThrow(), sommetRepository.findById(7L).orElseThrow())),
                     this.grapheRepository.findById(2L).orElseThrow()));
-            arreteRepository.save(new Arrete(8L,
+            arreteRepository.save(new Arrete(8L,s9,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(9L).orElseThrow(), sommetRepository.findById(10L).orElseThrow())),
                     this.grapheRepository.findById(2L).orElseThrow()));
-            arreteRepository.save(new Arrete(4L,
+            arreteRepository.save(new Arrete(4L,s9,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(9L).orElseThrow(), sommetRepository.findById(12L).orElseThrow())),
                     this.grapheRepository.findById(2L).orElseThrow()));
-            arreteRepository.save(new Arrete(8L,
+            arreteRepository.save(new Arrete(8L,s9,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(9L).orElseThrow(), sommetRepository.findById(13L).orElseThrow())),
                     this.grapheRepository.findById(2L).orElseThrow()));
-            arreteRepository.save(new Arrete(6L,
+            arreteRepository.save(new Arrete(6L,s10,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(10L).orElseThrow(), sommetRepository.findById(7L).orElseThrow())),
                     this.grapheRepository.findById(2L).orElseThrow()));
-            arreteRepository.save(new Arrete(22L,
+            arreteRepository.save(new Arrete(22L,s10,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(10L).orElseThrow(), sommetRepository.findById(9L).orElseThrow())),
                     this.grapheRepository.findById(2L).orElseThrow()));
-            arreteRepository.save(new Arrete(8L,
+            arreteRepository.save(new Arrete(8L,s12,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(12L).orElseThrow(), sommetRepository.findById(10L).orElseThrow())),
                     this.grapheRepository.findById(2L).orElseThrow()));
-            arreteRepository.save(new Arrete(26L,
+            arreteRepository.save(new Arrete(26L,s13,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(13L).orElseThrow(), sommetRepository.findById(9L).orElseThrow())),
                     this.grapheRepository.findById(2L).orElseThrow()));
-            arreteRepository.save(new Arrete(28L,
+            arreteRepository.save(new Arrete(28L,s13,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(13L).orElseThrow(), sommetRepository.findById(10L).orElseThrow())),
                     this.grapheRepository.findById(2L).orElseThrow()));
-            arreteRepository.save(new Arrete(6L,
+            arreteRepository.save(new Arrete(6L,s15,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(15L).orElseThrow(), sommetRepository.findById(10L).orElseThrow())),
                     this.grapheRepository.findById(2L).orElseThrow()));
-            arreteRepository.save(new Arrete(8L,
+            arreteRepository.save(new Arrete(8L,s17,
                     new HashSet<>(Arrays.asList(sommetRepository.findById(17L).orElseThrow(), sommetRepository.findById(9L).orElseThrow())),
                     this.grapheRepository.findById(2L).orElseThrow()));
 

@@ -15,10 +15,12 @@ public class ArreteImpl {
 
     private Long idArrete;
     private Long poids;
+    private Long idDirection;
     private Set<Long> mesSommets = new HashSet<>();
 
-    public ArreteImpl(Long poids, Set<Long> mesSommets) {
+    public ArreteImpl(Long poids, Set<Long> mesSommets, Long idDirection) {
         this.poids = poids;
         this.mesSommets = mesSommets;
+        this.idDirection=idDirection;
     }
 }

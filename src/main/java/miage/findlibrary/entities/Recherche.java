@@ -22,6 +22,10 @@ public class Recherche {
     private String name;
     private Long nb;
 
+    public Recherche(String name, Long nb) {
+        this.name = name;
+        this.nb = nb;
+    }
 
     public void setNb()
     {

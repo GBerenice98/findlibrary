@@ -21,7 +21,7 @@ public class SommetImpl {
     @Builder.Default
     private Set<Long> mesArretes = new HashSet<>();
 
-    public SommetImpl(String name,Long poids, Long idGraphe) {
+    public SommetImpl(String name, Long poids, Long idGraphe) {
         this.poids = poids;
         this.name = name;
         this.idGraphe = idGraphe;
