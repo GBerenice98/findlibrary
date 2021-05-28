@@ -25,9 +25,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.biblioService.getAllGraphes().subscribe(data => {
+    this.biblioService.getAllGraphes().subscribe((data: any[]) => {
       console.log("data : ", data);
-      data.forEach(g=> {
+      data.forEach((g: Graphe)=> {
         this.lesGraphes.push(g)
       })
       console.log("lesGraphes : ", this.lesGraphes)
@@ -37,29 +37,26 @@ export class HomeComponent implements OnInit {
   searchLibrary()
   {
     if(this.selectedCategorie==0)
-      this.openValidationModal("Merci de sélectionnez une catégorie. Pensez à regarder dans les graphes de migrations disponibles en cas de doute.");
+      this.openValidationModal("Merci de sélectionner une catégorie. Pensez à regarder dans les graphes de migrations disponibles en cas de doute.");
     else{
-      this.biblioService.libraryIsExist(this.selectedCategorie,this.source).subscribe(isExist => {
-        console.log("exist ? : ", isExist)
-        console.log("nom categorie : ",this.selectedCategorie)
-
+      this.biblioService.libraryIsExist(this.selectedCategorie,this.source).subscribe((isExist: any) => {
         let recherche : Recherche=new Recherche();
         recherche.name=this.source;
         recherche.nb=1;
-        this.biblioService.createRecherche(recherche).subscribe(r => { console.log("Recherche : ", r); })
+        this.biblioService.createRecherche(recherche).subscribe((r: any) => { })
 
         if(isExist) {
           let cibles: Array<Sommet>=[];
-          this.biblioService.findLibraryCandidates(this.source).subscribe(data =>
+          this.biblioService.findLibraryCandidates(this.source).subscribe((data: any[]) =>
           {
             if(data.length !=0) this.showResults=true;
             else this.openValidationModal("Désolé ! Nous n'avons pas trouvé de bibliothèques cibles pour cette bibliothèque.");
-            data.forEach(s => {
+            data.forEach((s: Sommet) => {
               cibles.push(s);
             })
           })
           this.libraryCibles=cibles;
-        }else this.openValidationModal("Nous n'avons pas trouvé cette bibliothèque dans notre base de données. Merci de vérifier votre syntaxe et la catégorie sélectionnée dans l'onglet 'Graphe' .");
+        }else this.openValidationModal("Nous n'avons pas trouvé cette bibliothèque dans notre base de données. Merci de vérifier votre syntaxe et la catégorie sélectionnée dans l'onglet Graphe.");
       })
     }
   }

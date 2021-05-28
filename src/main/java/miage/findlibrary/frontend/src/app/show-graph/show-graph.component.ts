@@ -17,11 +17,9 @@ export class ShowGraphComponent implements OnInit {
   ngOnInit(): void {
     
     this.biblioService.getAllGraphes().subscribe(data => {
-      console.log("data : ", data);
       data.forEach(g=> {
         this.lesGraphes.push(g)
       })
-      console.log("lesGraphes : ", this.lesGraphes)
     })
   }
 

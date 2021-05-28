@@ -1,6 +1,7 @@
 package miage.findlibrary.services;
 
 import miage.findlibrary.entities.Sommet;
+import miage.findlibrary.models.GrapheDto;
 import miage.findlibrary.repositories.SommetRepository;
 import miage.findlibrary.entities.Graphe;
 import miage.findlibrary.repositories.GrapheRepository;
@@ -18,14 +19,20 @@ public class GrapheService {
     @Autowired
     public SommetRepository sommetRepository;
 
-    public Graphe createGraphe(Graphe graphe)
+    public Graphe createGraphe(GrapheDto g)
     {
-        return this.grapheRepository.save(graphe);
+        return this.grapheRepository.save(new Graphe(g.getName(), g.getUrl()));
     }
 
-    public Graphe updateGraphe(Graphe g)
+    public Graphe updateGraphe(GrapheDto g)
     {
-        return this.grapheRepository.saveAndFlush(g);
+        Graphe updatedGraphe = this.grapheRepository.findById(g.getIdGraphe()).orElseThrow();
+        updatedGraphe.setName(g.getName());
+        updatedGraphe.setUrl(g.getUrl());
+        updatedGraphe.setListSommets(g.getListSommets());
+        updatedGraphe.setListArretes(g.getListArretes());
+
+        return this.grapheRepository.saveAndFlush(updatedGraphe);
     }
 
     public Set<Graphe> getAllGraphes()
